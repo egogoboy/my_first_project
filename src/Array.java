@@ -2,19 +2,22 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Array {
-    Scanner in = new Scanner(System.in);
+    Scanner in;
+    private final Action input;
     static int size;
     static int[] nums;
     static String name;
-    private Action input = new Action();
     static boolean created = false, elements = false;
     {
-        this.size = 0;
+        input = new Action();
+        in = new Scanner(System.in);
+        size = 0;
         name = "null";
         created = true;
         elements = false;
         System.out.print("array created successfully!\n");
     }
+
     public void createArray() throws IOException {
         setName();
         setSize();
@@ -50,9 +53,9 @@ public class Array {
     public void setSize() throws IOException{
         System.out.print("Enter new size of " + name + ": ");
         int size = in.nextInt();
-        if (this.size == 0) {
-            this.size = size;
-            System.out.print("New size of array: " + this.size + "\n");
+        if (size == 0) {
+            Array.size = size;
+            System.out.print("New size of array: " + size + "\n");
         }
         else {
             System.out.print("The size of the array has already been set. do you want to change it?" +
@@ -63,12 +66,12 @@ public class Array {
                 input.displayError();
             }
             if (input.getAns().equals("y")) {
-                this.size = size;
+                Array.size = size;
                 elements = false;
-                System.out.print("New size of array: " + this.size + "\n");
+                System.out.print("New size of array: " + size + "\n");
             }
         }
-        nums = new int[this.size];
+        nums = new int[size];
 
     }
     public void setName() throws IOException{
@@ -78,9 +81,9 @@ public class Array {
             System.out.print("You cannot use this name!\nEnter the new name of array: ");
             name = in.next();
         }
-        if (this.name.equals("null")) {
-            this.name = name;
-            System.out.print("New name of array: " + this.name + "\n");
+        if (Array.name.equals("null")) {
+            Array.name = name;
+            System.out.print("New name of array: " + Array.name + "\n");
         }
         else {
             System.out.print("The array already has a name. Are you sure you want to rename it? [y/n]\n");
@@ -90,13 +93,13 @@ public class Array {
                 input.displayError();
             }
             if (input.getAns().equals("y")) {
-                this.name = name;
-                System.out.print("New name of mass: " + this.name + "\n");
+                Array.name = name;
+                System.out.print("New name of mass: " + Array.name + "\n");
             }
         }
     }
     public int getSize() {
-        return this.size;
+        return Array.size;
     }
     public int getElement(int ind) {
         return nums[ind];
@@ -105,7 +108,7 @@ public class Array {
         return created;
     }
     public int[] getArray() {
-        return this.nums;
+        return Array.nums;
     }
     public void changeElement(int ind, int temp) {
         nums[ind] = temp;
@@ -115,7 +118,6 @@ public class Array {
         int temp = nums[l];
         nums[l] = nums[r];
         nums[r] = temp;
-        return;
     }
     public void displayArray() {
         System.out.print("Name of array: " + name +

@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Action {
     static String user;
-    {
+    static {
         System.out.print("user actions is ready to use\n");
     }
     public void userInput(){
@@ -11,7 +11,7 @@ public class Action {
         user = in.nextLine();
     }
     public String getAns(){
-        return this.user;
+        return user;
     }
     public void displayError() {
         System.out.print("Unknown command X(\n");
