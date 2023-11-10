@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Array {
@@ -18,13 +17,13 @@ public class Array {
         System.out.print("array created successfully!\n");
     }
 
-    public void createArray() throws IOException {
+    public void createArray() {
         setName();
         setSize();
         nums = new int[size];
         setElements();
     }
-    public void setElements() throws IOException {
+    public void setElements() {
         if (!elements) {
             System.out.print("Enter new elements of " + name + ": ");
             elements = true;
@@ -50,7 +49,7 @@ public class Array {
             }
         }
     }
-    public void setSize() throws IOException{
+    public void setSize() {
         System.out.print("Enter new size of " + name + ": ");
         int size = in.nextInt();
         if (Array.size == 0) {
@@ -74,7 +73,7 @@ public class Array {
         nums = new int[size];
 
     }
-    public void setName() throws IOException{
+    public void setName() {
         System.out.print("Enter the new name of array: ");
         String name = in.next();
         while (name.equals("null")) {
@@ -107,12 +106,8 @@ public class Array {
     public boolean getStatus() {
         return created;
     }
-    public int[] getArray() {
-        return Array.nums;
-    }
     public void changeElement(int ind, int temp) {
         nums[ind] = temp;
-        return;
     }
     public void swapElements(int l, int r) {
         int temp = nums[l];
