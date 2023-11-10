@@ -53,7 +53,7 @@ public class Array {
     public void setSize() throws IOException{
         System.out.print("Enter new size of " + name + ": ");
         int size = in.nextInt();
-        if (size == 0) {
+        if (Array.size == 0) {
             Array.size = size;
             System.out.print("New size of array: " + size + "\n");
         }

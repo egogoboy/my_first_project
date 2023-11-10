@@ -12,8 +12,16 @@ public class Sort {
         System.out.print("!!!Indexing starts with 1!!!\n");
         System.out.print("Enter start index: ");
         int start = in.nextInt();
+        while (start < 1 || start > m.getSize()) {
+            System.out.print("Invalid value! (1 <= start <= " + m.getSize() + ")\nEnter start index: ");
+            start = in.nextInt();
+        }
         System.out.print("Enter end index: ");
         int stop = in.nextInt();
+        while (stop < 0 || stop > m.getSize() || stop < start) {
+            System.out.print("Invalid value! (" + start + " <= end <= " + m.getSize() + ")\nEnter end index: ");
+            stop = in.nextInt();
+        }
         int ind = start, temp;
         while (ind < stop) {
             temp = m.getElement(ind);
