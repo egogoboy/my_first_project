@@ -1,9 +1,8 @@
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Sort {
     static Scanner in = new Scanner(System.in);
-    public static void insertionSort(Array m) throws IOException {
+    public static void insertionSort(Array m) {
         System.out.print("Enter option (>, <): ");
         String option = in.next();
         while (!option.equals(">") && !option.equals("<") && !option.equals(">=") && !option.equals("<=")) {
@@ -15,7 +14,7 @@ public class Sort {
         int start = in.nextInt();
         System.out.print("Enter end index: ");
         int stop = in.nextInt();
-        int ind = start, temp = m.getElement(ind);
+        int ind = start, temp;
         while (ind < stop) {
             temp = m.getElement(ind);
             for (int i = ind; i >= start - 1; --i) {
