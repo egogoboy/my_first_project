@@ -1,18 +1,24 @@
 import java.util.Scanner;
 
 public class Action {
-    static String user;
-    {
+    private final Scanner in = new Scanner(System.in);
+    private String user;
+    private int user_int;
+    public Action() {
         System.out.print("user actions is ready to use\n");
     }
-    public void userInput(){
-        Scanner in = new Scanner(System.in);
+    public void userInputString() {
         System.out.print("> ");
         user = in.nextLine();
     }
-    public String getAns(){
-        return this.user;
+    public void userInputInt() {
+        user_int = in.nextInt();
     }
+
+    public int getIntAns(){
+        return user_int;
+    }
+    public String getStringAns() { return user; }
     public void displayError() {
         System.out.print("Unknown command X(\n");
     }
@@ -20,13 +26,15 @@ public class Action {
         System.out.print("The array has already been created. Do you want to delete the current array and create a new one?[y/n]\n");
     }
     public void displayManual() {
-        System.out.print("-----Manual-----\n" +
-                "new array : deletes the old array and creates a completely new one\n" +
-                "set array name : sets the name of the current array\n" +
-                "set array size : sets the size of the current array (this will destroy all the elements!)\n" +
-                "set array : set array elements\n" +
-                "view array : outputs the contents of the current array\n" +
-                "start sort : starts sorting the array\n" +
-                "exit : breaks the program\n");
+        System.out.print("""
+                -----Manual-----
+                new array : deletes the old array and creates a completely new one
+                set array name : sets the name of the current array
+                set array size : sets the size of the current array (this will destroy all the elements!)
+                set array : set array elements
+                view array : outputs the contents of the current array
+                start sort : starts sorting the array
+                exit : breaks the program
+                """);
     }
 }

@@ -1,46 +1,88 @@
-import java.util.*;
-import java.io.*;
-
 public class Main {
-    public static void main(String[] args) throws IOException {
-        actions input = new actions();
-        array mass = new array();
+    public static void main(String[] args) {
+        Action input = new Action();
+        Array mass = new Array();
         mass.notCreated();
-        Sort sort = new Sort();
         displayHello();
         do {
-            input.userInput();
-            switch (input.getAns()) {
-                case ("manual") : input.displayManual(); break;
+            input.userInputString();
+            switch (input.getStringAns()) {
+                case ("manual") :
+                    input.displayManual();
+                break;
                 case ("new array") :
-                    if (mass.getStatus()) {
+                    if (mass.getCreatedStatus()) {
                         input.arrayIsAlreadyCreated();
-                        input.userInput();
-                        while (!input.getAns().equals("y") && !input.getAns().equals("n")) {
-                            input.userInput();
+                        input.userInputString();
+                        while (!input.getStringAns().equals("y") && !input.getStringAns().equals("n")) {
+                            input.userInputString();
                             input.displayError();
                         }
-                        if (input.getAns().equals("n"))
+                        if (input.getStringAns().equals("n"))
                             break;
                     }
-                    mass = new array();
+                    mass = new Array();
                     mass.createArray();
                 break;
-                case ("set array name"): mass.setName(); break;
-                case ("set array size"): mass.setSize(); break;
-                case ("set array"): mass.setElements(); break;
+                case ("set array name"):
+                    if (mass.getName().equals("null")) {
+                        System.out.print("The array already has a name. Are you sure you want to rename it? [y/n]\n");
+                        input.userInputString();
+                        while (!input.getStringAns().equals("y") && !input.getStringAns().equals("n")) {
+                            input.userInputString();
+                            input.displayError();
+                        }
+                    }
+                    if (input.getStringAns().equals("y") || !mass.getName().equals("null")) {
+
+                        mass.setName();
+                    }
+                    break;
+                case ("set array size"):
+                    if (mass.getSize() != 0) {
+                        System.out.print("The size of the array has already been set. do you want to change it?" +
+                                " (this will destroy all the elements!) [y/n]\n");
+                        input.userInputString();
+                        while (!input.getStringAns().equals("y") && !input.getStringAns().equals("n")) {
+                            input.userInputString();
+                            input.displayError();
+                        }
+                    }
+                    if (input.getStringAns().equals("y") || mass.getSize() == 0)
+                        mass.setSize();
+                    break;
+                case ("set array"):
+                    if (mass.getElementStatus()) {
+                        System.out.print("The array is already filled. Do you want to fill it out again? [y/n]\n");
+                        input.userInputString();
+                        while (!input.getStringAns().equals("y") && !input.getStringAns().equals("n")) {
+                            input.userInputString();
+                            input.displayError();
+                        }
+                        if (input.getStringAns().equals("y"))
+                            mass.setElements();
+                    }
+                    if (input.getStringAns().equals("y") || !mass.getElementStatus())
+                        mass.setElements();
+                break;
                 case ("view array"): mass.displayArray(); break;
                 case ("start sort"):
-                    sort.insertionSort(mass); break;
-                default : if (!input.getAns().equals("exit"))
+                    Sort sort = new Sort();
+                    sort.inputData(mass);
+                    sort.insertionSort(mass);
+                break;
+                default : if (!input.getStringAns().equals("exit"))
                             input.displayError();
                 break;
             }
-        } while (!input.getAns().equals("exit"));
+        } while (!input.getStringAns().equals("exit"));
 
     }
     static void displayHello() {
-        System.out.print("Welcome to my first project!\nIf you want to see manual, enter 'manual'\n" +
-                "If you want to exit, enter 'exit'\n");
+        System.out.print("""
+                Welcome to my first project!
+                If you want to see manual, enter 'manual'
+                If you want to exit, enter 'exit'
+                """);
     }
 }

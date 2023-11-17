@@ -1,49 +1,72 @@
-import java.io.IOException;
-import java.util.Scanner;
-
 public class Sort {
-    static Scanner in = new Scanner(System.in);
-    public static void insertionSort(Array m) throws IOException {
+
+    private final Action user;
+    private int start;
+    private int stop;
+    private String option;
+    public Sort() {
+        user = new Action();
+    }
+
+    public void inputData(Array mass) {
         System.out.print("Enter option (>, <): ");
-        String option = in.next();
+        this.user.userInputString();
+        option = user.getStringAns();
         while (!option.equals(">") && !option.equals("<") && !option.equals(">=") && !option.equals("<=")) {
-            System.out.print("Unknown command X(\n> ");
-            option = in.next();
+            System.out.print("Unknown command X(\n");
+            System.out.print("Enter option (>, <): ");
+            user.userInputInt();
+            option = user.getStringAns();
         }
         System.out.print("!!!Indexing starts with 1!!!\n");
         System.out.print("Enter start index: ");
-        int start = in.nextInt();
+
+        user.userInputInt();
+        start = user.getIntAns();
+        while (start < 1 || start > mass.getSize()) {
+            System.out.print("Invalid value! (1 <= start <= " + mass.getSize() + ")\nEnter start index: ");
+            user.userInputInt();
+            start = user.getIntAns();
+        }
         System.out.print("Enter end index: ");
-        int stop = in.nextInt();
-        int ind = start, temp = m.getElement(ind);
-        while (ind < stop) {
-            temp = m.getElement(ind);
-            for (int i = ind; i >= start - 1; --i) {
+        user.userInputInt();
+        stop = user.getIntAns();
+        while (stop < 0 || stop > mass.getSize() || stop < start) {
+            System.out.print("Invalid value! (" + start + " <= end <= " + mass.getSize() + ")\nEnter end index: ");
+            user.userInputInt();
+            stop = user.getIntAns();
+        }
+    }
+    public void insertionSort(Array mass) {
+        int index = start, temp;
+        while (index < stop) {
+            temp = mass.getElement(index);
+            for (int i = index; i >= start - 1; --i) {
                 if (i == start - 1) {
-                    m.changeElement(i, temp);
+                    mass.changeElement(i, temp);
                 } else
                     switch (option) {
                         case (">"):
-                            if (m.getElement((i - 1)) > temp) {
-                                m.swapElements((i - 1), i);
+                            if (mass.getElement((i - 1)) > temp) {
+                                mass.swapElements((i - 1), i);
                             }
                             else {
-                                m.changeElement(i, temp);
+                                mass.changeElement(i, temp);
                                 break;
                             }
                             break;
                         case ("<"):
-                            if (m.getElement((i - 1)) < temp) {
-                                m.swapElements((i - 1), i);
+                            if (mass.getElement((i - 1)) < temp) {
+                                mass.swapElements((i - 1), i);
                             }
                             else {
-                                m.changeElement(i, temp);
+                                mass.changeElement(i, temp);
                                 break;
                             }
                             break;
                     }
             }
-            ind++;
+            index++;
         }
         System.out.print("Sort has been completed successfully!\n");
     }
